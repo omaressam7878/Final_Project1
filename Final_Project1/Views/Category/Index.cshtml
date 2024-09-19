@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .category-table {
+            margin-top: 30px;
+        }
+        .btn-custom {
+            background-color: #009b77;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #007a65;
+        }
+    </style>
+</head>
+<body>
+    <div class="container category-table">
+        <h2 class="text-center">Categories</h2>
+        <a asp-action="Create" class="btn btn-custom mb-3">Add New Category</a>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.CategoryId</td>
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
+                        <td>
+                            <a asp-action="ViewDetails" asp-route-id="@category.CategoryId" class="btn btn-info">View</a>
+                            <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
